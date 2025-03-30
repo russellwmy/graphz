@@ -1,0 +1,82 @@
+[workspace.package]
+authors = ["Russell Wong"]
+edition = "2021"
+rust-version = "1.82.0"
+homepage = "https://github.com/russellwmy/graphz"
+repository = "https://github.com/russellwmy/graphz"
+license = "MIT"
+
+[workspace.metadata.workspaces]
+version = "0.20.1"
+exclude = []
+
+[workspace]
+resolver = "2"
+members = ["crates/graphz-core", "crates/graphz-io", "examples/demo-graph"]
+
+[workspace.dependencies]
+graphz-core = { path = "crates/graphz-core" }
+graphz-io = { path = "crates/graphz-io" }
+
+arrow = { version = "54.3.1", default-features = false }
+bytes = { version = "1.10.1", default-features = false }
+chrono = { version = "0.4.40", default-features = false }
+derive_builder = { version = "0.20.2", default-features = false }
+rand = { version = "0.9.0", default-features = false }
+serde = { version = "1.0.215", default-features = false }
+snafu = { version = "0.8.5", default-features = false }
+strum = { version = "0.27.1", default-features = false }
+tracing = { version = "0.1.41", default-features = false }
+tracing-subscriber = { version = "0.3.19", default-features = false }
+
+[workspace.lints.clippy]
+all = { level = "allow", priority = -100 }
+correctness = { level = "deny", priority = -50 }
+suspicious = { level = "deny", priority = -50 }
+perf = { level = "deny", priority = -50 }
+# overrides clippy::perf = "deny": https://github.com/rust-lang/rust-clippy/issues/8111
+single_char_pattern = "allow"
+clone_on_copy = "deny"
+derivable_impls = "deny"
+redundant_clone = "deny"
+len_zero = "deny"
+or_fun_call = "deny"
+unnecessary_lazy_evaluations = "deny"
+
+[workspace.lints.rust]
+# Will take effect since Rust 1.80, produces unused warning before it: https://github.com/rust-lang/cargo/pull/13913
+unexpected_cfgs = { level = "allow", check-cfg = ['cfg(enable_const_type_id)'] }
+
+
+[profile.dev]
+panic = 'abort'
+
+[profile.release]
+overflow-checks = true
+panic = 'abort'
+lto = "fat"
+codegen-units = 1
+
+# A much faster to compile version of `release`, for development use.
+[profile.dev-release]
+inherits = "release"
+lto = false
+codegen-units = 16
+debug-assertions = true
+
+# Used for fuzzing, LTO is ill-supported as of 2023-09 and so should not be enabled.
+[profile.fuzz]
+inherits = "dev"
+opt-level = 3
+incremental = false
+codegen-units = 1
+
+[profile.wasm-dev]
+inherits = "dev"
+opt-level = 1
+
+[profile.server-dev]
+inherits = "dev"
+
+[profile.android-dev]
+inherits = "dev"

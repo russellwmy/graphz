@@ -1,0 +1,21 @@
+[package]
+name = "demo-graph"
+version = "0.1.0"
+authors.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+homepage.workspace = true
+repository.workspace = true
+license.workspace = true
+
+[dependencies]
+graphz-core = { workspace = true }
+graphz-io = { workspace = true }
+
+rand = { workspace = true, features = ["thread_rng"] }
+snafu = { workspace = true, features = ["std"] }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true, features = ["fmt"] }
+
+[lints]
+workspace = true

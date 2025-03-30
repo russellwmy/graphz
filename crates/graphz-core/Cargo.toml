@@ -1,0 +1,21 @@
+[package]
+name = "graphz-core"
+version = "0.1.0"
+authors.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+homepage.workspace = true
+repository.workspace = true
+license.workspace = true
+
+[dependencies]
+arrow = { workspace = true }
+derive_builder = { workspace = true, features = ["alloc"] }
+serde = { workspace = true, features = ["derive"] }
+strum = { workspace = true, features = ["derive"] }
+snafu = { workspace = true, features = ["std"] }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+[lints]
+workspace = true

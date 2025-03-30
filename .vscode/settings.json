@@ -1,0 +1,14 @@
+{
+    "workbench.colorTheme": "Default Dark Modern",
+    "editor.formatOnSave": true,
+    "editor.foldingImportsByDefault": false,
+    "editor.unfoldOnClickAfterEndOfLine": true,
+    "[rust]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    },
+    "rust-analyzer.checkOnSave": true,
+    "rust-analyzer.diagnostics.disabled": [
+        "unresolved-proc-macro"
+    ]
+}
